@@ -38,8 +38,8 @@ dependencies:
   fl_chart: ^0.69.0
   google_fonts: ^6.2.1
   auto_size_text: ^3.0.0
-  get: ^4.6.6
   flutter_octicons: ^1.45.0
+  get: ^4.6.6
   
 dev_dependencies:
   flutter_test:

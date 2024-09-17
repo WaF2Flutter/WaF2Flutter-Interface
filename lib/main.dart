@@ -4,6 +4,7 @@ import 'package:msf/controllers/ThemeController.dart';
 import 'package:msf/screens/HomeScreen.dart';
 import 'package:get/get.dart';
 import 'package:msf/utills/theme.dart';
+import 'package:msf/utills/translator.dart';
 void main() {
   runApp(MyApp());
 }
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
 
+        translations: Translator(),
         initialBinding: MyBindings(),
 
         getPages: [
@@ -29,8 +31,7 @@ class MyApp extends StatelessWidget {
         ],
         initialRoute: '/home',
 
-
-        title: 'ModSec Admin Panel',
+        title: 'ModSec Admin Panel'.tr,
         
          theme: getTheme(isDark),
         home: HomeScreen(),

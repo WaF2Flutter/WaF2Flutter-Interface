@@ -13,7 +13,7 @@ class DashboardScreen extends StatelessWidget {
         child: Column( 
          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Line1(),
+            Header(),
             const SizedBox(
               height: 16,
             ),

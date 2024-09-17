@@ -1,11 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MenuController extends GetxController {
-  final RxBool _isMenuOpen = false.obs;
+  var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool get isMenuOpen => _isMenuOpen.value;
-
-  void toggleMenu() {
-    _isMenuOpen.value = !_isMenuOpen.value;
+  void opennDrawer() {
+   scaffoldKey.currentState!.openDrawer();
+    update();
   }
+  void closeDrawer() {
+   scaffoldKey.currentState!.openEndDrawer();
+    update();
+  }
+
+ 
 }

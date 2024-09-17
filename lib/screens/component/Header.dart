@@ -2,25 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:msf/main.dart';
 import 'package:msf/utills/responsive.dart';
-import 'package:get/get.dart';
-import 'package:msf/controllers/MenuController.dart' as MyMenuController;
-
-class Line1 extends StatelessWidget {
-  final MyMenuController.MenuController _menuController = Get.find();
-
-  Line1({
-    super.key,
-  });
+class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         if(!Responsive.isDesktop(context))
-          IconButton(
-            onPressed: () => _menuController.toggleMenu(),
-            icon: const Icon(Icons.menu_sharp),
-          ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.menu_sharp),
+        ),
         if(!Responsive.isMobile(context))
           AutoSizeText("Welcome  Admin!",
             style: Theme.of(context).textTheme.bodyLarge,

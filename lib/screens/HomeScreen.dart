@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:msf/screens/dashboard/dashboard_screen.dart';
 import 'package:msf/utills/responsive.dart';
 import 'component/SideBar.dart';
-import 'package:get/get.dart';
-import 'package:msf/controllers/MenuController.dart' as MyMenuController;
-
 class HomeScreen extends StatelessWidget {
-  final MyMenuController.MenuController _menuController = Get.put(MyMenuController.MenuController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,15 +21,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: GetBuilder<MyMenuController.MenuController>(
-        builder: (controller) {
-          if (controller != null && controller.isMenuOpen) {
-            return const Drawer();
-          } else {
-            return Container();
-          }
-        },
-      ),
+
     );
   }
 }

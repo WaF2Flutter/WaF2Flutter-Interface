@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:msf/main.dart';
 import 'package:msf/screens/dashboard/component/InfoCard.dart';
 import 'package:msf/screens/dashboard/sections/StatusSection.dart';
@@ -21,7 +21,7 @@ class Dashboard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Dashboard",
+                    "Dashboard".tr,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   //     ElevatedButton(onPressed: (){}, child:       Container(    width: 40,     height: 20,     decoration: BoxDecoration(       color: Colors.blueAccent,      borderRadius: BorderRadius.circular(5)      ),       child: Row(     children: [ Icon(Icons.add_outlined), Text("Add R")    ],    ), ))

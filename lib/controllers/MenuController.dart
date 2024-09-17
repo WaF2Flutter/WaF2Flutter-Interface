@@ -5,13 +5,12 @@ class MenuController extends GetxController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   void opennDrawer() {
-   scaffoldKey.currentState!.openDrawer();
-    update();
-  }
-  void closeDrawer() {
-   scaffoldKey.currentState!.openEndDrawer();
+    scaffoldKey.currentState!.openDrawer();
     update();
   }
 
- 
+  void closeDrawer() {
+    scaffoldKey.currentState!.openEndDrawer();
+    update();
+  }
 }

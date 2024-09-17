@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-
+import 'package:get/get.dart';
 
 class CircleChart extends StatelessWidget {
   @override
@@ -32,7 +32,7 @@ class CircleChart extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("Safe",style: Theme.of(context).textTheme.headlineSmall,),
-            const Text("WAF is ON!")
+            Text("WAF is ON!".tr)
           ],
         ) )
         ]

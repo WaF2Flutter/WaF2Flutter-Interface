@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:msf/main.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:msf/screens/dashboard/component/CircleChar.dart';
-
+import 'package:get/get.dart';
+import 'package:msf/utills/colorconfig.dart';
 class StatusSection extends StatelessWidget {
   const StatusSection({
     super.key,
@@ -22,7 +22,7 @@ class StatusSection extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "Status",
+              "Status".tr,
               style: TextStyle(
                   fontSize: 18, fontWeight: FontWeight.w500),
             ),
@@ -52,7 +52,7 @@ class StatusSection extends StatelessWidget {
                     width: 10,
                   ),
                   AutoSizeText(
-                    "Visitors: ",
+                    "Visitors: ".tr,
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
@@ -86,7 +86,7 @@ class StatusSection extends StatelessWidget {
                     width: 10,
                   ),
                   AutoSizeText(
-                    "Last refresh: ",
+                    "Last refresh: ".tr,
                     maxLines: 2,
                     style: TextStyle(fontSize: 12),
                   ),
@@ -120,7 +120,7 @@ class StatusSection extends StatelessWidget {
                     width: 10,
                   ),
                   AutoSizeText(
-                    "Suspected: ",
+                    "Suspected: ".tr,
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
@@ -154,7 +154,7 @@ class StatusSection extends StatelessWidget {
                     width: 10,
                   ),
                   AutoSizeText(
-                    "Critical: ",
+                    "Critical: ".tr,
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),

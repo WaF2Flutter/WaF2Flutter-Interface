@@ -31,7 +31,8 @@ class CircleChart extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Safe",style: Theme.of(context).textTheme.headlineSmall,),
+            Text("Safe".tr,
+            style: Theme.of(context).textTheme.headlineSmall,),
             Text("WAF is ON!".tr)
           ],
         ) )

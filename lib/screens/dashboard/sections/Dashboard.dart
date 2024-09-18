@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:msf/main.dart';
 import 'package:msf/screens/dashboard/component/InfoCard.dart';
 import 'package:msf/screens/dashboard/sections/StatusSection.dart';
 import 'package:msf/data/data.dart';
 import 'package:msf/data/RecentActivity.dart';
 import 'package:msf/utills/responsive.dart';
-
+import 'package:msf/utills/colorconfig.dart';
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                                 padEnds: false,
                                 enableInfiniteScroll: false,
                                 autoPlayAnimationDuration:
-                                    Duration(milliseconds: 800),
+                                Duration(milliseconds: 800),
                                 viewportFraction: 1.0,
                               ),
                               items: [
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                                     border: const OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                      BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                 ),
@@ -115,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                                     border: const OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                      BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                 ),
@@ -123,37 +123,37 @@ class LoginScreen extends StatelessWidget {
                               SizedBox(
                                 height: 20,
                               ),
-                              GestureDetector(
+                              Obx(() => Get.find<LoginController>().loginProcess.value
+                                  ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                                  : GestureDetector(
                                 onTap: () {
                                   Get.find<LoginController>().login(
                                       usernameController.text,
                                       passwordController.text);
                                 },
-                                child: Obx(() => Container(
-                                      width: Responsive.isDesktop(context)
-                                          ? screenWidth * 0.2
-                                          : screenWidth * 0.8,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: primaryColor.withOpacity(0.4),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8)),
+                                child: Container(
+                                  width: Responsive.isDesktop(context)
+                                      ? screenWidth * 0.2
+                                      : screenWidth * 0.8,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: primaryColor.withOpacity(0.4),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(8)),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Login',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
                                       ),
-                                      child: Center(
-                                        child: Get.find<LoginController>()
-                                                .loginProcess
-                                                .value
-                                            ? CircularProgressIndicator()
-                                            : Text(
-                                                'Login',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                ),
-                                              ),
-                                      ),
-                                    )),
-                              ),
+                                    ),
+                                  ),
+                                ),
+                              )),
                             ],
                           ),
                         ),

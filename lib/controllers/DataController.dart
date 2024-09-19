@@ -9,7 +9,7 @@ class DataController extends GetxController{
   List<CloudInfo> get cloudInfo => _cloudInfo;
   List<Recentactivity> get recentActivity => _recentActivity;
 
-  // Method to update the data
+
   void updateData(List<CloudInfo> newCloudInfo, List<Recentactivity> newRecentActivity) {
     _cloudInfo.clear();
     _cloudInfo.addAll(newCloudInfo);

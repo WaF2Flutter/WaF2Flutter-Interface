@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import "package:get/get.dart";
 import 'package:msf/screens/HomeScreen.dart';
@@ -12,8 +10,9 @@ class LoginController extends GetxController {
 
   String username = "";
   String password = "";
+ 
   final Communication _communication = Communication();
-
+  
   Future<void> login(String username, String password) async {
     this.username = username;
     this.password = password;
@@ -73,7 +72,7 @@ class LoginController extends GetxController {
           maxWidth: 360,
           isDismissible: true,
         );
-        await Get.to(() => HomeScreen());
+        await Get.off(() => HomeScreen());
       } else {
         loginSuccess.value = false;
         Get.snackbar(

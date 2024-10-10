@@ -1,39 +1,48 @@
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:msf/screens/LoginScreen.dart';
 
-class IdleController extends GetxController{
+class IdleController extends GetxController {
+  Timer? _idleTimer;
 
-final IdleTimeout _idleTimeout = IdleTimeout();
+ void _showIdleSnackbar() {
+Get.snackbar(
+  'Idle Alert'.tr, 
+  'You have been idle for some min. Do you want to stay?'.tr, 
+  snackPosition: SnackPosition.TOP, 
+  maxWidth: 450,
+  margin: EdgeInsets.all(10), 
+  colorText: Colors.black45, 
+  duration: Duration(seconds: 1000), 
+  isDismissible: false,
 
-  @override
-  void onInit() {
-    _idleTimeout.startTimeout(Duration(minutes: 1));
-    super.onInit();
-  }
-
-  void onUserInteraction() {
-    _idleTimeout.resetTimeout();
-  }
+  mainButton: TextButton(
+    onPressed: () {
+      onUserInteraction();
+      Get.back();
+    },
+    child: Text('YES'.tr),
+  ),
+);
 }
 
-class IdleTimeout {
-  late Timer _timer;
-
-  void startTimeout(Duration duration) {
-        print("TimeOut Started");
-    _timer = Timer(duration, onTimeout);
+  void onUserInteraction() {
+    _idleTimer?.cancel();
+    _idleTimer = Timer.periodic(Duration(seconds: 30), (timer) {
+      _showIdleSnackbar();
+    });
+  }
+  @override
+  void onInit() {
+    super.onInit();
+    _idleTimer = Timer.periodic(Duration(seconds: 30), (timer) {
+      _showIdleSnackbar();
+    });
   }
 
-  void resetTimeout() {
-    _timer.cancel();
-    startTimeout(Duration(minutes: 1));
-    print("TimeOut Resets");
-  }
-
-  void onTimeout() {
-        print("TimeOut Finished process to login");
-    Get.offAll(LoginScreen());
+  @override
+  void onClose() {
+    _idleTimer?.cancel();
+    super.onClose();
   }
 }

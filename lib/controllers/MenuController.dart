@@ -8,9 +8,4 @@ class MenuController extends GetxController {
     scaffoldKey.currentState!.openDrawer();
     update();
   }
-
-  void closeDrawer() {
-    scaffoldKey.currentState!.openEndDrawer();
-    update();
-  }
 }

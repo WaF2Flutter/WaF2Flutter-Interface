@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 class CircleChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //Firewall detail
 
+    //Firewall detail
     return SizedBox(
       height: 200,
       child: Stack(

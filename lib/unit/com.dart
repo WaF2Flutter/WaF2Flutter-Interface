@@ -38,7 +38,7 @@ class Communication {
     if (_isConnected) {
       _webSocket.sink.add('-login' + username + password);
       final response = await _responseStreamController.stream.first;
-      if (response is String && response.isNotEmpty) {
+      if (response.isNotEmpty) {
         final jsonData = jsonDecode(response);
         if (jsonData['login_status'] == 'success') {
           print("success");

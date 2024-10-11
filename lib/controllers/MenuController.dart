@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MenuController extends GetxController {
+class Menu_Controller extends GetxController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void opennDrawer() {
-    scaffoldKey.currentState!.openDrawer();
-    update();
+  void openDrawer() {
+    if (scaffoldKey.currentState != null && !scaffoldKey.currentState!.isDrawerOpen) {
+      scaffoldKey.currentState!.openDrawer();
+    }
   }
 }

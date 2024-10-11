@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:msf/data/data.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:msf/utills/colorconfig.dart';
+
 class InfoCards extends StatelessWidget {
-  final CloudInfo info;
+  final IconData icon;
+  final String title;
+  final Color color;
+  final int numOfFiles;
+  final int percentage;
+  final String totalStorage;
 
   InfoCards({
-    required this.info,
+    required this.icon,
+    required this.title,
+    required this.color,
+    required this.numOfFiles,
+    required this.percentage,
+    required this.totalStorage,
   });
 
   @override
@@ -18,50 +27,47 @@ class InfoCards extends StatelessWidget {
         color: secondryColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(   
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
-                  color: info.color.withOpacity(0.1),
+                  color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
-                  info.icon,
-                  color: info.color,
+                  icon,
+                  color: color,
                 ),
               ),
               Icon(Icons.more_vert_sharp),
             ],
           ),
           AutoSizeText(
-            info.title,
+            title,
             maxLines: 1,
           ),
-//This is for example Progress Bar that we need to deploy it later...
-//For now lets fill it with some ah canvas??
           ProgressBar(
-            info: info,
-            color: info.color,
-            percentage: info.percentage,
+            color: color,
+            percentage: percentage,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${info.numOfFiles}",
+                "$numOfFiles Files",
                 style: TextStyle(
                   color: Colors.white70,
                 ),
               ),
               Text(
-                info.totalStorage,
+                totalStorage,
                 style: TextStyle(
                   color: Colors.white70,
                 ),
@@ -82,10 +88,7 @@ class ProgressBar extends StatelessWidget {
     required this.color,
     required this.percentage,
     super.key,
-    required this.info,
   });
-
-  final CloudInfo info;
 
   @override
   Widget build(BuildContext context) {
@@ -95,17 +98,20 @@ class ProgressBar extends StatelessWidget {
           width: double.infinity,
           height: 5,
           decoration: BoxDecoration(
-              color: info.color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(10)),
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
         LayoutBuilder(
           builder: (context, constraints) => Container(
             width: constraints.maxWidth * (percentage / 100),
             height: 5,
             decoration: BoxDecoration(
-                color: color, borderRadius: BorderRadius.circular(10)),
+              color: color,
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
-        )
+        ),
       ],
     );
   }

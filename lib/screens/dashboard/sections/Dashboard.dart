@@ -7,6 +7,7 @@ import 'package:msf/screens/dashboard/sections/StatusSection.dart';
 import 'package:msf/data/RecentActivity.dart';
 import 'package:msf/utills/responsive.dart';
 import 'package:msf/utills/colorconfig.dart';
+
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,6 @@ class Dashboard extends StatelessWidget {
                     "Dashboard".tr,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  //     ElevatedButton(onPressed: (){}, child:       Container(    width: 40,     height: 20,     decoration: BoxDecoration(       color: Colors.blueAccent,      borderRadius: BorderRadius.circular(5)      ),       child: Row(     children: [ Icon(Icons.add_outlined), Text("Add R")    ],    ), ))
                 ],
               ),
               SizedBox(
@@ -41,21 +41,37 @@ class Dashboard extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              AttacksPerApplicationTable(
-                activities: demoRecentActivity,
-                secondryColor: secondryColor,
+              Responsive(
+                mobile: Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: AttacksPerApplicationTable(
+                    activities: demoRecentActivity,
+                    secondryColor: secondryColor,
+                  ),
+                ),
+                tablet: AttacksPerApplicationTable(
+                  activities: demoRecentActivity,
+                  secondryColor: secondryColor,
+                ),
+                desktop: AttacksPerApplicationTable(
+                  activities: demoRecentActivity,
+                  secondryColor: secondryColor,
+                ),
               ),
               if (Responsive.isMobile(context))
-                StatusSection(),
-         SizedBox(
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: StatusSection(),
+                ),
+              SizedBox(
                 height: 16,
               ),
             ],
           ),
         ),
-          SizedBox(
-            width: 16,
-          ),
+        SizedBox(
+          width: 16,
+        ),
         if (!Responsive.isMobile(context))
           Expanded(
             flex: 2,
@@ -77,7 +93,7 @@ class InfoCardGridView extends StatelessWidget {
     this.childAspectRatio = 1.2,
   }) : super(key: key);
 
-  final DataController dataController = Get.put(DataController());
+  final DataController dataController = Get.put(DataController()); 
 
   @override
   Widget build(BuildContext context) {

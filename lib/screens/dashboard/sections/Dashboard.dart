@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:get/get.dart';
+import 'package:msf/controllers/DataController.dart';
 import 'package:msf/screens/dashboard/component/InfoCard.dart';
 import 'package:msf/screens/dashboard/sections/StatusSection.dart';
-import 'package:msf/data/data.dart';
 import 'package:msf/data/RecentActivity.dart';
 import 'package:msf/utills/responsive.dart';
 import 'package:msf/utills/colorconfig.dart';
@@ -65,28 +66,91 @@ class Dashboard extends StatelessWidget {
   }
 }
 
+
 class InfoCardGridView extends StatelessWidget {
   final int crossAxisCount;
   final double childAspectRatio;
 
-  const InfoCardGridView(
-      {super.key, this.crossAxisCount = 4, this.childAspectRatio = 4});
+  InfoCardGridView({
+    Key? key,
+    this.crossAxisCount = 4,
+    this.childAspectRatio = 1.2,
+  }) : super(key: key);
+
+  final DataController dataController = Get.put(DataController());
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    final Size size = MediaQuery.of(context).size;
+
+    double cardWidth = (size.width - (crossAxisCount - 1) * 16) / crossAxisCount;
+    double cardHeight = cardWidth / childAspectRatio;
+
+    return GridView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: demoInfo.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: childAspectRatio),
-      itemBuilder: (context, index) => InfoCards(info: demoInfo[index]),
+        crossAxisCount: crossAxisCount,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: childAspectRatio,
+      ),
+      children: [
+        SizedBox(
+          width: cardWidth,
+          height: cardHeight,
+          child: Obx(() => InfoCards(
+            icon: OctIcons.cpu_24,
+            title: "CPU Usage",
+            color: Colors.blueAccent,
+            numOfFiles: dataController.cpuFiles.value,
+            percentage: dataController.cpuUsage.value,
+            totalStorage: dataController.cpuStorage.value,
+          )),
+        ),
+        SizedBox(
+          width: cardWidth,
+          height: cardHeight,
+          child: Obx(() => InfoCards(
+            icon: OctIcons.cloud_24,
+            title: "Cloud Usage",
+            color: Colors.yellowAccent,
+            numOfFiles: dataController.cloudFiles.value,
+            percentage: dataController.cloudUsage.value,
+            totalStorage: dataController.cloudStorage.value,
+          )),
+        ),
+        SizedBox(
+          width: cardWidth,
+          height: cardHeight,
+          child: Obx(() => InfoCards(
+            icon: Icons.memory_rounded,
+            title: "Memory Usage",
+            color: Colors.blueGrey,
+            numOfFiles: dataController.memoryFiles.value,
+            percentage: dataController.memoryUsage.value,
+            totalStorage: dataController.memoryStorage.value,
+          )),
+        ),
+        SizedBox(
+          width: cardWidth,
+          height: cardHeight,
+          child: Obx(() => InfoCards(
+            icon: Icons.traffic_outlined,
+            title: "Traffic Usage",
+            color: Colors.blue,
+            numOfFiles: dataController.trafficFiles.value,
+            percentage: dataController.trafficUsage.value,
+            totalStorage: dataController.trafficStorage.value,
+          )),
+        ),
+      ],
     );
   }
 }
+
+
+
 
 class AttacksPerApplicationTable extends StatelessWidget {
   final List<Recentactivity> activities;
@@ -133,7 +197,7 @@ class AttacksPerApplicationTable extends StatelessWidget {
                   return DataRow(cells: [
                     DataCell(Text(activity.id.toString())),
                     DataCell(Text(Uri.parse(activity.app)
-                        .host)), // display the hostname of the URL
+                        .host)), 
                     DataCell(Text(activity.cr.toString())),
                     DataCell(Text(activity.w.toString())),
                     DataCell(Text(activity.n.toString())),

@@ -4,8 +4,11 @@ import 'package:msf/screens/dashboard/dashboard_screen.dart';
 import 'package:msf/utills/responsive.dart';
 import 'component/SideBar.dart';
 import 'package:get/get.dart';
+import 'package:msf/controllers/MenuController.dart'; 
+
 class HomeScreen extends StatelessWidget {
 
+  final Menu_Controller menuController = Get.put(Menu_Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +17,19 @@ class HomeScreen extends StatelessWidget {
         Get.find<IdleController>().onUserInteraction();
       },
       child: Scaffold(
+        key: menuController.scaffoldKey, 
+          drawer: !Responsive.isDesktop(context) 
+            ? const Drawer( 
+                child: SideBar(),
+              )
+            : null,
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //Drawer flex 1/6
             if (Responsive.isDesktop(context))
               const Expanded(
                 child: SideBar(),
               ),
-            //Drawer flex 5/6
             const Expanded(
               flex: 5,
               child: DashboardScreen(),

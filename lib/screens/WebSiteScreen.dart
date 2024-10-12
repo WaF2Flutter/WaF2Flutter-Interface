@@ -7,18 +7,20 @@ import 'component/SideBar.dart';
 import 'package:get/get.dart';
 
 class Websitescreen extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _webScaffoldKey = GlobalKey<ScaffoldState>();  // Unique GlobalKey
+
   final Menu_Controller menuController = Get.put(Menu_Controller());
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Get.find<IdleController>().onUserInteraction();
       },
       child: Scaffold(
-                key: menuController.scaffoldKey, 
-          drawer: !Responsive.isDesktop(context) 
-            ? const Drawer( 
+        key: _webScaffoldKey, 
+        drawer: !Responsive.isDesktop(context)
+            ? const Drawer(
                 child: SideBar(),
               )
             : null,
@@ -31,12 +33,10 @@ class Websitescreen extends StatelessWidget {
               ),
             Expanded(
               flex: 5,
-              //صفحه اصلیمون که روش باید کار بشه
-             child: websites_screen(),
+              child: websites_screen(),
             ),
           ],
         ),
-      
       ),
     );
   }

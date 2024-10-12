@@ -24,14 +24,14 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           AutoSizeText(
-            "Welcome Admin!",
+            "Welcome Admin!".tr,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         if (!Responsive.isMobile(context)) Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         Expanded(
           child: TextField(
             decoration: InputDecoration(
-              hintText: "Search",
+              hintText: "Search".tr,
               fillColor: secondryColor,
               filled: true,
               border: const OutlineInputBorder(
@@ -70,24 +70,25 @@ class Header extends StatelessWidget {
               const Text("admin1"),
 
               PopupMenuButton<String>(
+                color: secondryColor,
                 onSelected: (value) {
-                  if (value == 'logout') {
+                  if (value == 'logout'.tr) {
                     _showLogoutConfirmation();
                   }
                 },
                 itemBuilder: (BuildContext context) {
                   return [
                     PopupMenuItem<String>(
-                      value: 'profile',
-                      child: Text('Profile'),
+                      value: 'profile'.tr,
+                      child: Text('Profile'.tr),
                     ),
                     PopupMenuItem<String>(
-                      value: 'settings',
-                      child: Text('Settings'),
+                      value: 'settings'.tr,
+                      child: Text('Settings'.tr),
                     ),
                     PopupMenuItem<String>(
-                      value: 'logout',
-                      child: Text('Logout'),
+                      value: 'logout'.tr,
+                      child: Text('Logout'.tr),
                     ),
                   ];
                 },
@@ -101,15 +102,36 @@ class Header extends StatelessWidget {
   }
 
   void _showLogoutConfirmation() {
-    Get.defaultDialog(
-      title: "Logout",
-      middleText: "Are you sure you want to logout?",
-      onConfirm: () {
-        Get.back(); 
-      },
-      onCancel: () {
-        Get.back(); 
-      },
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: secondryColor,
+        title: Text(
+          "Logout".tr,
+          style: TextStyle(color: Colors.white),
+        ),
+        content: Text(
+          "Are you sure you want to logout?".tr,
+          style: TextStyle(color: Colors.white), 
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text(
+              "Cancel".tr,
+              style: TextStyle(color: Colors.red), 
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.back(); 
+            },
+            child: Text("Confirm".tr),
+          ),
+        ],
+      ),
+      barrierDismissible: true,
     );
   }
 }

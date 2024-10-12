@@ -68,11 +68,48 @@ class Header extends StatelessWidget {
             children: [
               const Icon(Icons.account_circle, size: 26),
               const Text("admin1"),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_drop_down_rounded)),
+
+              PopupMenuButton<String>(
+                onSelected: (value) {
+                  if (value == 'logout') {
+                    _showLogoutConfirmation();
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem<String>(
+                      value: 'profile',
+                      child: Text('Profile'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'settings',
+                      child: Text('Settings'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'logout',
+                      child: Text('Logout'),
+                    ),
+                  ];
+                },
+                icon: const Icon(Icons.arrow_drop_down_rounded),
+              ),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  void _showLogoutConfirmation() {
+    Get.defaultDialog(
+      title: "Logout",
+      middleText: "Are you sure you want to logout?",
+      onConfirm: () {
+        Get.back(); 
+      },
+      onCancel: () {
+        Get.back(); 
+      },
     );
   }
 }

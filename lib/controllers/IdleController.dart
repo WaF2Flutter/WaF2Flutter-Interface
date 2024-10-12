@@ -6,7 +6,7 @@ class IdleController extends GetxController {
   Timer? _idleTimer;
 
  void _showIdleSnackbar() {
-Get.snackbar(
+  Get.snackbar(
   'Idle Alert'.tr, 
   'You have been idle for some min. Do you want to stay?'.tr, 
   snackPosition: SnackPosition.TOP, 

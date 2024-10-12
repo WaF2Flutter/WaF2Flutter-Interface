@@ -6,7 +6,6 @@ import 'package:msf/screens/dashboard/component/InfoCard.dart';
 import 'package:msf/screens/dashboard/sections/StatusSection.dart';
 import 'package:msf/data/RecentActivity.dart';
 import 'package:msf/utills/responsive.dart';
-import 'package:msf/utills/colorconfig.dart';
 
 class Dashboard extends StatelessWidget {
   @override
@@ -31,13 +30,15 @@ class Dashboard extends StatelessWidget {
                 height: 16,
               ),
               Responsive(
-                  mobile: InfoCardGridView(
-                    crossAxisCount: _size.width < 650 ? 2:4,
-                    childAspectRatio: _size.width < 650 ? 1.3 :1,),
-                  tablet: InfoCardGridView(),
-                  desktop: InfoCardGridView(
-                    childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
-                  )),
+                mobile: InfoCardGridView(
+                  crossAxisCount: _size.width < 650 ? 2 : 4,
+                  childAspectRatio: _size.width < 650 ? 1.3 : 1,
+                ),
+                tablet: InfoCardGridView(),
+                desktop: InfoCardGridView(
+                  childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
+                ),
+              ),
               SizedBox(
                 height: 16,
               ),
@@ -46,16 +47,16 @@ class Dashboard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 16),
                   child: AttacksPerApplicationTable(
                     activities: demoRecentActivity,
-                    secondryColor: secondryColor,
+                    secondryColor: Theme.of(context).secondaryHeaderColor,
                   ),
                 ),
                 tablet: AttacksPerApplicationTable(
                   activities: demoRecentActivity,
-                  secondryColor: secondryColor,
+                  secondryColor: Theme.of(context).secondaryHeaderColor, 
                 ),
                 desktop: AttacksPerApplicationTable(
                   activities: demoRecentActivity,
-                  secondryColor: secondryColor,
+                  secondryColor: Theme.of(context).secondaryHeaderColor, 
                 ),
               ),
               if (Responsive.isMobile(context))
@@ -82,7 +83,6 @@ class Dashboard extends StatelessWidget {
   }
 }
 
-
 class InfoCardGridView extends StatelessWidget {
   final int crossAxisCount;
   final double childAspectRatio;
@@ -93,7 +93,7 @@ class InfoCardGridView extends StatelessWidget {
     this.childAspectRatio = 1.2,
   }) : super(key: key);
 
-  final DataController dataController = Get.put(DataController()); 
+  final DataController dataController = Get.put(DataController());
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +118,7 @@ class InfoCardGridView extends StatelessWidget {
           child: Obx(() => InfoCards(
             icon: OctIcons.cpu_24,
             title: "CPU Usage",
-            color: Colors.blueAccent,
+            color: Theme.of(context).colorScheme.primary,
             numOfFiles: dataController.cpuFiles.value,
             percentage: dataController.cpuUsage.value,
             totalStorage: dataController.cpuStorage.value,
@@ -130,7 +130,7 @@ class InfoCardGridView extends StatelessWidget {
           child: Obx(() => InfoCards(
             icon: OctIcons.cloud_24,
             title: "Cloud Usage",
-            color: Colors.yellowAccent,
+            color: Theme.of(context).colorScheme.secondary,
             numOfFiles: dataController.cloudFiles.value,
             percentage: dataController.cloudUsage.value,
             totalStorage: dataController.cloudStorage.value,
@@ -142,7 +142,7 @@ class InfoCardGridView extends StatelessWidget {
           child: Obx(() => InfoCards(
             icon: Icons.memory_rounded,
             title: "Memory Usage",
-            color: Colors.blueGrey,
+            color: Theme.of(context).colorScheme.tertiary,
             numOfFiles: dataController.memoryFiles.value,
             percentage: dataController.memoryUsage.value,
             totalStorage: dataController.memoryStorage.value,
@@ -154,7 +154,7 @@ class InfoCardGridView extends StatelessWidget {
           child: Obx(() => InfoCards(
             icon: Icons.traffic_outlined,
             title: "Traffic Usage",
-            color: Colors.blue,
+            color: Theme.of(context).colorScheme.surface, 
             numOfFiles: dataController.trafficFiles.value,
             percentage: dataController.trafficUsage.value,
             totalStorage: dataController.trafficStorage.value,
@@ -164,18 +164,12 @@ class InfoCardGridView extends StatelessWidget {
     );
   }
 }
-
-
-
-
 class AttacksPerApplicationTable extends StatelessWidget {
   final List<Recentactivity> activities;
-  final Color secondryColor;
 
   const AttacksPerApplicationTable({
     Key? key,
-    required this.activities,
-    required this.secondryColor,
+    required this.activities, required Color secondryColor,
   }) : super(key: key);
 
   @override
@@ -185,7 +179,7 @@ class AttacksPerApplicationTable extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: secondryColor,
+          color: Theme.of(context).colorScheme.onSecondary, 
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -193,7 +187,7 @@ class AttacksPerApplicationTable extends StatelessWidget {
           children: [
             Text(
               "Attacks per Application",
-              style: TextStyle(fontSize: 16),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             SizedBox(
               width: double.infinity,
@@ -207,13 +201,12 @@ class AttacksPerApplicationTable extends StatelessWidget {
                   DataColumn(label: Text("Warning")),
                   DataColumn(label: Text("Notice")),
                   DataColumn(label: Text("Errors")),
-                  DataColumn(label: Text("Reqiests")),
+                  DataColumn(label: Text("Requests")),
                 ],
                 rows: activities.map((activity) {
                   return DataRow(cells: [
                     DataCell(Text(activity.id.toString())),
-                    DataCell(Text(Uri.parse(activity.app)
-                        .host)), 
+                    DataCell(Text(Uri.parse(activity.app).host)),
                     DataCell(Text(activity.cr.toString())),
                     DataCell(Text(activity.w.toString())),
                     DataCell(Text(activity.n.toString())),

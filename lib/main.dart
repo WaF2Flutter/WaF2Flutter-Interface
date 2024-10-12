@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:msf/bindings/bindings.dart';
 import 'package:get/get.dart';
+import 'package:msf/controllers/ThemeController.dart';
 import 'package:msf/screens/HomeScreen.dart';
 import 'package:msf/screens/LoginScreen.dart';
 import 'package:msf/screens/WebSiteScreen.dart';
 import 'package:msf/utills/theme.dart';
 import 'package:msf/utills/translator.dart';
-import 'package:msf/controllers/ThemeController.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

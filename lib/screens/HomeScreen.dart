@@ -7,9 +7,8 @@ import 'package:get/get.dart';
 import 'package:msf/controllers/MenuController.dart';
 
 class HomeScreen extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _homeScaffoldKey = GlobalKey<ScaffoldState>(); // Unique GlobalKey
-
-  final Menu_Controller menuController = Get.find<Menu_Controller>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>(); // Define the GlobalKey
+  final Menu_Controller menuController = Get.find<Menu_Controller>(); 
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class HomeScreen extends StatelessWidget {
         Get.find<IdleController>().onUserInteraction();
       },
       child: Scaffold(
-        key: _homeScaffoldKey,  
+        key: scaffoldKey,
         drawer: !Responsive.isDesktop(context)
             ? const Drawer(
                 child: SideBar(),
@@ -31,9 +30,9 @@ class HomeScreen extends StatelessWidget {
               const Expanded(
                 child: SideBar(),
               ),
-            const Expanded(
+            Expanded(
               flex: 5,
-              child: DashboardScreen(),
+              child: DashboardScreen(scaffoldKey: scaffoldKey), 
             ),
           ],
         ),

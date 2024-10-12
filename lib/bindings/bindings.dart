@@ -10,7 +10,7 @@ class MyBindings implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => LoginController());
-    Get.lazyPut(() => Menu_Controller());
+    Get.put(Menu_Controller());
     Get.put(ThemeController()); 
     Get.lazyPut(() => Translatecontroller());
     Get.put(IdleController());

@@ -3,29 +3,28 @@ import '../component/Header.dart';
 import 'sections/Dashboard.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+  final GlobalKey<ScaffoldState> scaffoldKey; 
+
+  const DashboardScreen({super.key, required this.scaffoldKey}); 
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column( 
-         mainAxisAlignment: MainAxisAlignment.start,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Header(),
-            const SizedBox(
-              height: 16,
-            ),
+            Header(scaffoldKey: scaffoldKey),
+            const SizedBox(height: 16),
             Column(
               children: [
                 Dashboard(),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-

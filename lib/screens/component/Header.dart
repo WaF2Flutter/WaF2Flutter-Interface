@@ -4,8 +4,12 @@ import 'package:get/get.dart';
 import 'package:msf/utills/colorconfig.dart';
 import 'package:msf/utills/responsive.dart';
 import 'package:msf/controllers/MenuController.dart';
+
 class Header extends StatelessWidget {
-  final Menu_Controller menuController = Get.find<Menu_Controller>();
+  final GlobalKey<ScaffoldState> scaffoldKey; 
+  final Menu_Controller menuController = Get.find<Menu_Controller>(); 
+
+  Header({required this.scaffoldKey}); 
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class Header extends StatelessWidget {
         if (!Responsive.isDesktop(context))
           IconButton(
             onPressed: () {
-                menuController.openDrawer();
+              menuController.openDrawer(scaffoldKey); 
             },
             icon: const Icon(Icons.menu_sharp),
           ),

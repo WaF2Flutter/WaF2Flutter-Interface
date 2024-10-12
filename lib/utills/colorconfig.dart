@@ -7,4 +7,4 @@ const Color primaryColor = Color(0xFF2697FF);
 
 //For white theme
 const Color bgDrawer = Color.fromARGB(255, 39, 46, 62);
-const Color bgColorW = Color.fromARGB(255, 229, 229, 229);
+const Color bgColorW = Color.fromARGB(255, 187, 185, 185);

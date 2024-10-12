@@ -6,10 +6,10 @@ import 'package:msf/utills/colorconfig.dart';
 import 'package:msf/utills/responsive.dart';
 
 class LoginScreen extends StatelessWidget {
+  
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  
-   
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                                 padEnds: false,
                                 enableInfiniteScroll: false,
                                 autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
+                                    Duration(milliseconds: 800),
                                 viewportFraction: 1.0,
                               ),
                               items: [
@@ -95,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                                     border: const OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                                          BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                 ),
@@ -117,7 +117,7 @@ class LoginScreen extends StatelessWidget {
                                     border: const OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                                          BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                 ),
@@ -125,39 +125,46 @@ class LoginScreen extends StatelessWidget {
                               SizedBox(
                                 height: 20,
                               ),
-Obx(() => Get.find<LoginController>().loginProcess.value
-    ? Center(
-        child: CircularProgressIndicator(),
-      )
-    : ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor.withOpacity(0.4),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          minimumSize: Size(
-            Responsive.isDesktop(context)
-                ? screenWidth * 0.2
-                : screenWidth * 0.8,
-            50,
-          ),
-        ),
-        onPressed: () {
-          if (!Get.find<LoginController>().loginProcess.value) {
-            Get.find<LoginController>().login(
-                usernameController.text,
-                passwordController.text);
-          }
-        },
-        child: Text(
-          'Login',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-          ),
-        ),
-      ),
-)
+                              Obx(
+                                () => Get.find<LoginController>()
+                                        .loginProcess
+                                        .value
+                                    ? Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              primaryColor.withOpacity(0.4),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          minimumSize: Size(
+                                            Responsive.isDesktop(context)
+                                                ? screenWidth * 0.2
+                                                : screenWidth * 0.8,
+                                            50,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          if (!Get.find<LoginController>()
+                                              .loginProcess
+                                              .value) {
+                                            Get.find<LoginController>().login(
+                                                usernameController.text,
+                                                passwordController.text);
+                                          }
+                                        },
+                                        child: Text(
+                                          'Login',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                              )
                             ],
                           ),
                         ),

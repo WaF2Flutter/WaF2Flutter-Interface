@@ -23,24 +23,28 @@ class SideBar extends StatelessWidget {
               color: Theme.of(context).dividerColor,
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed("/home");
+              },
               leading: const Icon(
                 Icons.speed_outlined,
                 color: Colors.white60,
               ),
-              title:  AutoSizeText(
+              title: AutoSizeText(
                 "Dashboard",
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed("/websites");
+              },
               leading: const Icon(
                 Icons.web,
                 color: Colors.white60,
               ),
-              title:  AutoSizeText(
+              title: AutoSizeText(
                 "Websites",
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
@@ -52,10 +56,10 @@ class SideBar extends StatelessWidget {
                 Icons.settings_sharp,
                 color: Colors.white60,
               ),
-              title:  AutoSizeText(
+              title: AutoSizeText(
                 "Settings",
                 maxLines: 1,
-                 style: TextStyle(color: Theme.of(context).primaryColor),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             ListTile(
@@ -64,10 +68,10 @@ class SideBar extends StatelessWidget {
                 Icons.speed_outlined,
                 color: Colors.white60,
               ),
-              title:  AutoSizeText(
+              title: AutoSizeText(
                 "Statics",
                 maxLines: 1,
-                 style: TextStyle(color: Theme.of(context).primaryColor),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             ListTile(
@@ -76,22 +80,22 @@ class SideBar extends StatelessWidget {
                 Icons.padding,
                 color: Colors.white60,
               ),
-              title:  AutoSizeText(
+              title: AutoSizeText(
                 "System Log",
                 maxLines: 1,
-                 style: TextStyle(color: Theme.of(context).primaryColor),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             Row(
               children: [
-  Obx(() {
-    return Switch(
-      value: Get.find<ThemeController>().isDark.value,
-      onChanged: (value) {
-        Get.find<ThemeController>().toggle();
-      },
-    );
-  }),
+                Obx(() {
+                  return Switch(
+                    value: Get.find<ThemeController>().isDark.value,
+                    onChanged: (value) {
+                      Get.find<ThemeController>().toggle();
+                    },
+                  );
+                }),
               ],
             ),
           ],

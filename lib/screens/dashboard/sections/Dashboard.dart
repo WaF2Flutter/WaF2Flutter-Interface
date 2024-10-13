@@ -3,6 +3,7 @@ import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:get/get.dart';
 import 'package:msf/controllers/DataController.dart';
 import 'package:msf/screens/dashboard/component/InfoCard.dart';
+import 'package:msf/screens/dashboard/component/ViewersChart.dart';
 import 'package:msf/screens/dashboard/sections/StatusSection.dart';
 import 'package:msf/data/RecentActivity.dart';
 import 'package:msf/utills/responsive.dart';
@@ -11,73 +12,84 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        Expanded(
-          flex: 5,
-          child: Column(
-            children: [
-              Row(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 5,
+              child: Column(
                 children: [
-                  Text(
-                    "Dashboard".tr,
-                    style: Theme.of(context).textTheme.titleLarge,
+                  Row(
+                    children: [
+                      Text(
+                        "Dashboard".tr,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ],
                   ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Responsive(
+                    mobile: InfoCardGridView(
+                      crossAxisCount: _size.width < 650 ? 2 : 4,
+                      childAspectRatio: _size.width < 650 ? 1.3 : 1,
+                    ),
+                    tablet: InfoCardGridView(),
+                    desktop: InfoCardGridView(
+                      childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Responsive(
+                    mobile: Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: AttacksPerApplicationTable(
+                        activities: demoRecentActivity,
+                        secondryColor: Theme.of(context).secondaryHeaderColor,
+                      ),
+                    ),
+                    tablet: AttacksPerApplicationTable(
+                      activities: demoRecentActivity,
+                      secondryColor: Theme.of(context).secondaryHeaderColor,
+                    ),
+                    desktop: AttacksPerApplicationTable(
+                      activities: demoRecentActivity,
+                      secondryColor: Theme.of(context).secondaryHeaderColor,
+                    ),
+                  ),
+                  if (Responsive.isMobile(context))
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: StatusSection(),
+                    ),
+                  SizedBox(
+                    height: 16,
+                  ),
+        
                 ],
               ),
-              SizedBox(
-                height: 16,
+            ),
+            SizedBox(
+              width: 16,
+            ),
+            if (!Responsive.isMobile(context))
+              Expanded(
+                flex: 2,
+                child: StatusSection(),
               ),
-              Responsive(
-                mobile: InfoCardGridView(
-                  crossAxisCount: _size.width < 650 ? 2 : 4,
-                  childAspectRatio: _size.width < 650 ? 1.3 : 1,
-                ),
-                tablet: InfoCardGridView(),
-                desktop: InfoCardGridView(
-                  childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
-                ),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Responsive(
-                mobile: Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: AttacksPerApplicationTable(
-                    activities: demoRecentActivity,
-                    secondryColor: Theme.of(context).secondaryHeaderColor,
-                  ),
-                ),
-                tablet: AttacksPerApplicationTable(
-                  activities: demoRecentActivity,
-                  secondryColor: Theme.of(context).secondaryHeaderColor, 
-                ),
-                desktop: AttacksPerApplicationTable(
-                  activities: demoRecentActivity,
-                  secondryColor: Theme.of(context).secondaryHeaderColor, 
-                ),
-              ),
-              if (Responsive.isMobile(context))
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: StatusSection(),
-                ),
-              SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
+          ],
         ),
-        SizedBox(
-          width: 16,
-        ),
-        if (!Responsive.isMobile(context))
-          Expanded(
-            flex: 2,
-            child: StatusSection(),
-          ),
+        SizedBox(height: 10,),
+                Responsive(
+                mobile: Viewers(),
+                tablet: Viewers(),
+                desktop: Viewers(),
+              )
       ],
     );
   }
@@ -99,7 +111,8 @@ class InfoCardGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    double cardWidth = (size.width - (crossAxisCount - 1) * 16) / crossAxisCount;
+    double cardWidth =
+        (size.width - (crossAxisCount - 1) * 16) / crossAxisCount;
     double cardHeight = cardWidth / childAspectRatio;
 
     return GridView(
@@ -116,60 +129,62 @@ class InfoCardGridView extends StatelessWidget {
           width: cardWidth,
           height: cardHeight,
           child: Obx(() => InfoCards(
-            icon: OctIcons.cpu_24,
-            title: "CPU Usage",
-            color: Theme.of(context).colorScheme.primary,
-            numOfFiles: dataController.cpuFiles.value,
-            percentage: dataController.cpuUsage.value,
-            totalStorage: dataController.cpuStorage.value,
-          )),
+                icon: OctIcons.cpu_24,
+                title: "CPU Usage",
+                color: Theme.of(context).colorScheme.primary,
+                numOfFiles: dataController.cpuFiles.value,
+                percentage: dataController.cpuUsage.value,
+                totalStorage: dataController.cpuStorage.value,
+              )),
         ),
         SizedBox(
           width: cardWidth,
           height: cardHeight,
           child: Obx(() => InfoCards(
-            icon: OctIcons.cloud_24,
-            title: "Cloud Usage",
-            color: Theme.of(context).colorScheme.secondary,
-            numOfFiles: dataController.cloudFiles.value,
-            percentage: dataController.cloudUsage.value,
-            totalStorage: dataController.cloudStorage.value,
-          )),
+                icon: OctIcons.cloud_24,
+                title: "Cloud Usage",
+                color: Theme.of(context).colorScheme.secondary,
+                numOfFiles: dataController.cloudFiles.value,
+                percentage: dataController.cloudUsage.value,
+                totalStorage: dataController.cloudStorage.value,
+              )),
         ),
         SizedBox(
           width: cardWidth,
           height: cardHeight,
           child: Obx(() => InfoCards(
-            icon: Icons.memory_rounded,
-            title: "Memory Usage",
-            color: Theme.of(context).colorScheme.tertiary,
-            numOfFiles: dataController.memoryFiles.value,
-            percentage: dataController.memoryUsage.value,
-            totalStorage: dataController.memoryStorage.value,
-          )),
+                icon: Icons.memory_rounded,
+                title: "Memory Usage",
+                color: Theme.of(context).colorScheme.tertiary,
+                numOfFiles: dataController.memoryFiles.value,
+                percentage: dataController.memoryUsage.value,
+                totalStorage: dataController.memoryStorage.value,
+              )),
         ),
         SizedBox(
           width: cardWidth,
           height: cardHeight,
           child: Obx(() => InfoCards(
-            icon: Icons.traffic_outlined,
-            title: "Traffic Usage",
-            color: Theme.of(context).colorScheme.surface, 
-            numOfFiles: dataController.trafficFiles.value,
-            percentage: dataController.trafficUsage.value,
-            totalStorage: dataController.trafficStorage.value,
-          )),
+                icon: Icons.traffic_outlined,
+                title: "Traffic Usage",
+                color: Theme.of(context).colorScheme.surface,
+                numOfFiles: dataController.trafficFiles.value,
+                percentage: dataController.trafficUsage.value,
+                totalStorage: dataController.trafficStorage.value,
+              )),
         ),
       ],
     );
   }
 }
+
 class AttacksPerApplicationTable extends StatelessWidget {
   final List<Recentactivity> activities;
 
   const AttacksPerApplicationTable({
     Key? key,
-    required this.activities, required Color secondryColor,
+    required this.activities,
+    required Color secondryColor,
   }) : super(key: key);
 
   @override
@@ -179,7 +194,7 @@ class AttacksPerApplicationTable extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary, 
+          color: Theme.of(context).colorScheme.onSecondary,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(

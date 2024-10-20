@@ -130,7 +130,7 @@ class InfoCardGridView extends StatelessWidget {
           height: cardHeight,
           child: Obx(() => InfoCards(
                 icon: OctIcons.cpu_24,
-                title: "CPU Usage",
+                title: "CPU Usage".tr,
                 color: Theme.of(context).colorScheme.primary,
                 numOfFiles: dataController.cpuFiles.value,
                 percentage: dataController.cpuUsage.value,
@@ -142,7 +142,7 @@ class InfoCardGridView extends StatelessWidget {
           height: cardHeight,
           child: Obx(() => InfoCards(
                 icon: OctIcons.cloud_24,
-                title: "Cloud Usage",
+                title: "Cloud Usage".tr,
                 color: Theme.of(context).colorScheme.secondary,
                 numOfFiles: dataController.cloudFiles.value,
                 percentage: dataController.cloudUsage.value,
@@ -154,7 +154,7 @@ class InfoCardGridView extends StatelessWidget {
           height: cardHeight,
           child: Obx(() => InfoCards(
                 icon: Icons.memory_rounded,
-                title: "Memory Usage",
+                title: "Memory Usage".tr,
                 color: Theme.of(context).colorScheme.tertiary,
                 numOfFiles: dataController.memoryFiles.value,
                 percentage: dataController.memoryUsage.value,
@@ -166,7 +166,7 @@ class InfoCardGridView extends StatelessWidget {
           height: cardHeight,
           child: Obx(() => InfoCards(
                 icon: Icons.traffic_outlined,
-                title: "Traffic Usage",
+                title: "Traffic Usage".tr,
                 color: Theme.of(context).colorScheme.surface,
                 numOfFiles: dataController.trafficFiles.value,
                 percentage: dataController.trafficUsage.value,
@@ -201,7 +201,7 @@ class AttacksPerApplicationTable extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Attacks per Application",
+              "Attacks per Application".tr,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             SizedBox(
@@ -211,12 +211,12 @@ class AttacksPerApplicationTable extends StatelessWidget {
                 horizontalMargin: 0,
                 columns: [
                   DataColumn(label: Text("#")),
-                  DataColumn(label: Text("Application")),
-                  DataColumn(label: Text("Critical")),
-                  DataColumn(label: Text("Warning")),
-                  DataColumn(label: Text("Notice")),
-                  DataColumn(label: Text("Errors")),
-                  DataColumn(label: Text("Requests")),
+                  DataColumn(label: Text("Application".tr)),
+                  DataColumn(label: Text("Critical".tr)),
+                  DataColumn(label: Text("Warning".tr)),
+                  DataColumn(label: Text("Notice".tr)),
+                  DataColumn(label: Text("Errors".tr)),
+                  DataColumn(label: Text("Requests".tr)),
                 ],
                 rows: activities.map((activity) {
                   return DataRow(cells: [

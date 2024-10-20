@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:msf/controllers/CounterController.dart';
 import 'package:msf/controllers/LoginController.dart';
 import 'package:msf/controllers/MenuController.dart';
 import 'package:msf/controllers/ThemeController.dart';
@@ -12,7 +13,8 @@ class MyBindings implements Bindings {
     Get.lazyPut(() => LoginController());
     Get.put(Menu_Controller());
     Get.put(ThemeController()); 
-    Get.lazyPut(() => Translatecontroller());
+    Get.put(Counter()); 
+    Get.put(TranslateController());
     Get.put(IdleController());
     Get.put(DataController(), permanent: false);
   }

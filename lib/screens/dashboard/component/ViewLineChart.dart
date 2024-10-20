@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../../../utills/colorconfig.dart';
+import 'package:get/get.dart';
 
 class ViewLineChart extends StatefulWidget {
   const ViewLineChart({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _ViewLineChartState extends State<ViewLineChart> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16), 
+      padding: EdgeInsets.all(16),
       child: LineChart(
         LineChartData(
           gridData: FlGridData(show: false),
@@ -31,25 +32,25 @@ class _ViewLineChartState extends State<ViewLineChart> {
                 getTitlesWidget: (value, meta) {
                   switch (value.toInt()) {
                     case 0:
-                      return Text('Sun', style: TextStyle(color: Colors.white));
+                      return Text('Sun'.tr, style: TextStyle(color: Colors.white));
                     case 4:
-                      return Text('Mon', style: TextStyle(color: Colors.white));
+                      return Text('Mon'.tr, style: TextStyle(color: Colors.white));
                     case 7:
-                      return Text('Tue', style: TextStyle(color: Colors.white));
+                      return Text('Tue'.tr, style: TextStyle(color: Colors.white));
                     case 10:
-                      return Text('Wed', style: TextStyle(color: Colors.white));
+                      return Text('Wed'.tr, style: TextStyle(color: Colors.white));
                     case 13:
-                      return Text('Thu', style: TextStyle(color: Colors.white));
+                      return Text('Thu'.tr, style: TextStyle(color: Colors.white));
                     case 16:
-                      return Text('Fri', style: TextStyle(color: Colors.white));
+                      return Text('Fri'.tr, style: TextStyle(color: Colors.white));
                     case 19:
-                      return Text('Sat', style: TextStyle(color: Colors.white));
+                      return Text('Sat'.tr, style: TextStyle(color: Colors.white));
                   }
                   return Container();
                 },
               ),
             ),
-            leftTitles: AxisTitles( 
+            leftTitles: AxisTitles(
               sideTitles: SideTitles(showTitles: false),
             ),
           ),

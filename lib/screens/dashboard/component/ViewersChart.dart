@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:msf/screens/dashboard/component/ViewLineChart.dart';
 import 'package:msf/utills/colorconfig.dart';
 
@@ -19,7 +20,7 @@ class Viewers extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Viewers',
+            'Viewers'.tr,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,

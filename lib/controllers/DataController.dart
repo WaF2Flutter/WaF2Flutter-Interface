@@ -1,4 +1,3 @@
-//IN DEV mode this data's are sample.
 import 'dart:async';
 import 'dart:math';
 import 'package:get/get.dart';

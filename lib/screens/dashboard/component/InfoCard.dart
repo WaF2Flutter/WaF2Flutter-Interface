@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:get/get.dart';
 import 'package:msf/utills/colorconfig.dart';
 
 class InfoCards extends StatelessWidget {
@@ -61,7 +62,7 @@ class InfoCards extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "$numOfFiles Files",
+                "$numOfFiles Files".tr,
                 style: TextStyle(
                   color: Colors.white70,
                 ),

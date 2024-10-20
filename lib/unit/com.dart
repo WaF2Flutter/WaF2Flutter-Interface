@@ -3,8 +3,6 @@ import 'dart:convert';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-
-//Todo: Process the reciving data's
 //import 'package:msf/controllers/DataController.dart';
 
 class Communication {

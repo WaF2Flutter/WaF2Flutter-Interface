@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:msf/controllers/ThemeController.dart';
+import 'package:msf/controllers/TranslateController.dart';
 import 'package:get/get.dart';
 
 class SideBar extends StatelessWidget {
@@ -15,23 +16,15 @@ class SideBar extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            //   DrawerHeader(child: Image.asset("img/Icon.png")),
-            const SizedBox(
-              height: 80,
-            ),
-            Divider(
-              color: Theme.of(context).dividerColor,
-            ),
+            const SizedBox(height: 80),
+            Divider(color: Theme.of(context).dividerColor),
             ListTile(
               onTap: () {
                 Get.toNamed("/home");
               },
-              leading: const Icon(
-                Icons.speed_outlined,
-                color: Colors.white60,
-              ),
+              leading: const Icon(Icons.speed_outlined, color: Colors.white60),
               title: AutoSizeText(
-                "Dashboard",
+                "Dashboard".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
@@ -40,10 +33,7 @@ class SideBar extends StatelessWidget {
               onTap: () {
                 Get.toNamed("/websites");
               },
-              leading: const Icon(
-                Icons.web,
-                color: Colors.white60,
-              ),
+              leading: const Icon(Icons.web, color: Colors.white60),
               title: AutoSizeText(
                 "Websites",
                 maxLines: 1,
@@ -51,49 +41,78 @@ class SideBar extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: () {},
-              leading: const Icon(
-                Icons.settings_sharp,
-                color: Colors.white60,
-              ),
+              onTap: () {
+                Get.toNamed("/setting");
+              },
+              leading: const Icon(Icons.settings_sharp, color: Colors.white60),
               title: AutoSizeText(
-                "Settings",
+                "Settings".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             ListTile(
               onTap: () {},
-              leading: const Icon(
-                Icons.speed_outlined,
-                color: Colors.white60,
-              ),
+              leading: const Icon(Icons.speed_outlined, color: Colors.white60),
               title: AutoSizeText(
-                "Statics",
+                "Statistics".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             ListTile(
               onTap: () {},
-              leading: const Icon(
-                Icons.padding,
-                color: Colors.white60,
-              ),
+              leading: const Icon(Icons.padding, color: Colors.white60),
               title: AutoSizeText(
-                "System Log",
+                "System Log".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
+            const SizedBox(height: 20), 
+
+
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: AutoSizeText(
+                    "Dark Mode",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
                 Obx(() {
                   return Switch(
                     value: Get.find<ThemeController>().isDark.value,
                     onChanged: (value) {
                       Get.find<ThemeController>().toggle();
                     },
+                    activeColor: Theme.of(context).primaryColor,
+                  );
+                }),
+              ],
+            ),
+
+            const SizedBox(height: 20), 
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: AutoSizeText(
+                    "Language",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                Obx(() {
+                  return Switch(
+                    value: Get.find<TranslateController>().isEnglish.value, 
+                    onChanged: (value) {
+                      Get.find<TranslateController>().changeLang(value ? 'en' : 'fa');
+                    },
+                    activeColor: Theme.of(context).primaryColor,
                   );
                 }),
               ],

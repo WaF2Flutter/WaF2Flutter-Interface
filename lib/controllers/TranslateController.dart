@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class Translatecontroller  extends GetxController{
+class TranslateController extends GetxController {
+  var isEnglish = true.obs; 
 
-  void ChangeLang(String Lang)
-  {
-    var locale = Locale(Lang);
+  void changeLang(String lang) {
+    isEnglish.value = lang == 'en';
+    var locale = Locale(lang);
     Get.updateLocale(locale);
   }
 }

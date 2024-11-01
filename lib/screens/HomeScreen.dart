@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:msf/controllers/MenuController.dart';
 
 class HomeScreen extends StatelessWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>(); // Define the GlobalKey
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final Menu_Controller menuController = Get.find<Menu_Controller>(); 
 
   @override

@@ -4,6 +4,8 @@ class Translator extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en': {
+          'Beta version.If you exprience any problem or having a suggestion please tell us.':'Beta version.If you exprience any problem or having a suggestion please tell us.',
+          'English': "فارسی",
           'ModSec Admin Panel': 'ModSec Admin Panel',
           'Dashboard': 'Dashboard',
           'CPU Usage': 'CPU Usage',
@@ -46,8 +48,11 @@ class Translator extends Translations {
           'Critical: ': 'Critical: ',
           'Safe': 'Safe',
           'WAF is ON!': 'WAF is ON!',
+          'وب سایت ها': 'Websites'
         },
         'fa': {
+          'Beta version.If you exprience any problem or having a suggestion please tell us.': 'نسخه ازمایشی.با در اختیار گذاشتن خطا ها باگ ها و یا پیشنهاداتنون ما را در مسیر ساخت تجربه ایی بهتر یاری کنید! با تشکر',
+          'فارسی': 'English',
           'ModSec Admin Panel': 'پنل ادمین ModSec',
           'Dashboard': 'داشبورد',
           'CPU Usage': 'مصرف CPU',
@@ -73,7 +78,6 @@ class Translator extends Translations {
           'Idle Alert': 'هشدار عدم فعالیت',
           'You have been idle for some min. Do you want to stay?': 'برای چند دقیقه بیکار بوده‌اید. آیا می‌خواهید بمانید؟',
           'YES': 'بله',
-          'Websites': 'وب‌سایت‌ها',
           'Statistics': 'آمار',
           'System Log': 'لاگ سیستم',
           'Dark Mode': 'حالت تاریک',
@@ -90,6 +94,7 @@ class Translator extends Translations {
           'Critical: ': 'بحرانی: ',
           'Safe': 'ایمن',
           'WAF is ON!': 'WAF فعال است!',
+          'Websites': 'وب سایت ها'
         },
       };
 }

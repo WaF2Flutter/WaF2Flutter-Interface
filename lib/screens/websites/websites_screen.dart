@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../component/Header.dart';
 
 class websites_screen extends StatelessWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey; // Pass the GlobalKey to this widget
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
-  websites_screen({Key? key, required this.scaffoldKey}) : super(key: key); // Constructor to receive the GlobalKey
+  websites_screen({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +14,10 @@ class websites_screen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Header(scaffoldKey: scaffoldKey), // Pass the scaffoldKey to Header
+            Header(scaffoldKey: scaffoldKey),
             const SizedBox(height: 16),
             Column(
               children: [
-                // Your content here
               ],
             ),
           ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:get/get.dart';
-import 'package:msf/controllers/DataController.dart';
-import 'package:msf/screens/dashboard/component/InfoCard.dart';
+import 'package:msf/screens/component/EndSection.dart';
+import 'package:msf/screens/dashboard/component/AttacksPerApplicationTable.dart';
+import 'package:msf/screens/dashboard/component/InfoCardGridView.dart';
 import 'package:msf/screens/dashboard/component/ViewersChart.dart';
 import 'package:msf/screens/dashboard/sections/StatusSection.dart';
 import 'package:msf/data/RecentActivity.dart';
@@ -49,16 +49,13 @@ class Dashboard extends StatelessWidget {
                     mobile: Padding(
                       padding: const EdgeInsets.only(top: 16),
                       child: AttacksPerApplicationTable(
-                        activities: demoRecentActivity,
                         secondryColor: Theme.of(context).secondaryHeaderColor,
                       ),
                     ),
                     tablet: AttacksPerApplicationTable(
-                      activities: demoRecentActivity,
                       secondryColor: Theme.of(context).secondaryHeaderColor,
                     ),
                     desktop: AttacksPerApplicationTable(
-                      activities: demoRecentActivity,
                       secondryColor: Theme.of(context).secondaryHeaderColor,
                     ),
                   ),
@@ -70,7 +67,6 @@ class Dashboard extends StatelessWidget {
                   SizedBox(
                     height: 16,
                   ),
-        
                 ],
               ),
             ),
@@ -84,156 +80,22 @@ class Dashboard extends StatelessWidget {
               ),
           ],
         ),
-        SizedBox(height: 10,),
-                Responsive(
-                mobile: Viewers(),
-                tablet: Viewers(),
-                desktop: Viewers(),
-              )
+        SizedBox(
+          height: 10,
+        ),
+        Responsive(
+          mobile: Viewers(),
+          tablet: Viewers(),
+          desktop: Viewers(),
+        ),
+        SizedBox(height: 16,),
+        Responsive(
+          mobile: EndSection(),
+          tablet: EndSection(),
+          desktop: EndSection(),
+        ),
+
       ],
-    );
-  }
-}
-
-class InfoCardGridView extends StatelessWidget {
-  final int crossAxisCount;
-  final double childAspectRatio;
-
-  InfoCardGridView({
-    Key? key,
-    this.crossAxisCount = 4,
-    this.childAspectRatio = 1.2,
-  }) : super(key: key);
-
-  final DataController dataController = Get.put(DataController());
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
-    double cardWidth =
-        (size.width - (crossAxisCount - 1) * 16) / crossAxisCount;
-    double cardHeight = cardWidth / childAspectRatio;
-
-    return GridView(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        childAspectRatio: childAspectRatio,
-      ),
-      children: [
-        SizedBox(
-          width: cardWidth,
-          height: cardHeight,
-          child: Obx(() => InfoCards(
-                icon: OctIcons.cpu_24,
-                title: "CPU Usage".tr,
-                color: Theme.of(context).colorScheme.primary,
-                numOfFiles: dataController.cpuFiles.value,
-                percentage: dataController.cpuUsage.value,
-                totalStorage: dataController.cpuStorage.value,
-              )),
-        ),
-        SizedBox(
-          width: cardWidth,
-          height: cardHeight,
-          child: Obx(() => InfoCards(
-                icon: OctIcons.cloud_24,
-                title: "Cloud Usage".tr,
-                color: Theme.of(context).colorScheme.secondary,
-                numOfFiles: dataController.cloudFiles.value,
-                percentage: dataController.cloudUsage.value,
-                totalStorage: dataController.cloudStorage.value,
-              )),
-        ),
-        SizedBox(
-          width: cardWidth,
-          height: cardHeight,
-          child: Obx(() => InfoCards(
-                icon: Icons.memory_rounded,
-                title: "Memory Usage".tr,
-                color: Theme.of(context).colorScheme.tertiary,
-                numOfFiles: dataController.memoryFiles.value,
-                percentage: dataController.memoryUsage.value,
-                totalStorage: dataController.memoryStorage.value,
-              )),
-        ),
-        SizedBox(
-          width: cardWidth,
-          height: cardHeight,
-          child: Obx(() => InfoCards(
-                icon: Icons.traffic_outlined,
-                title: "Traffic Usage".tr,
-                color: Theme.of(context).colorScheme.surface,
-                numOfFiles: dataController.trafficFiles.value,
-                percentage: dataController.trafficUsage.value,
-                totalStorage: dataController.trafficStorage.value,
-              )),
-        ),
-      ],
-    );
-  }
-}
-
-class AttacksPerApplicationTable extends StatelessWidget {
-  final List<Recentactivity> activities;
-
-  const AttacksPerApplicationTable({
-    Key? key,
-    required this.activities,
-    required Color secondryColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-      child: Container(
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Attacks per Application".tr,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: DataTable(
-                columnSpacing: 40,
-                horizontalMargin: 0,
-                columns: [
-                  DataColumn(label: Text("#")),
-                  DataColumn(label: Text("Application".tr)),
-                  DataColumn(label: Text("Critical".tr)),
-                  DataColumn(label: Text("Warning".tr)),
-                  DataColumn(label: Text("Notice".tr)),
-                  DataColumn(label: Text("Errors".tr)),
-                  DataColumn(label: Text("Requests".tr)),
-                ],
-                rows: activities.map((activity) {
-                  return DataRow(cells: [
-                    DataCell(Text(activity.id.toString())),
-                    DataCell(Text(Uri.parse(activity.app).host)),
-                    DataCell(Text(activity.cr.toString())),
-                    DataCell(Text(activity.w.toString())),
-                    DataCell(Text(activity.n.toString())),
-                    DataCell(Text(activity.e.toString())),
-                    DataCell(Text(activity.r.toString())),
-                  ]);
-                }).toList(),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

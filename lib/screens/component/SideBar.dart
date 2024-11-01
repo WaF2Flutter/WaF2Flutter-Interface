@@ -35,7 +35,7 @@ class SideBar extends StatelessWidget {
               },
               leading: const Icon(Icons.web, color: Colors.white60),
               title: AutoSizeText(
-                "Websites",
+                "Websites".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
@@ -69,16 +69,15 @@ class SideBar extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
-            const SizedBox(height: 20), 
-
-
+            //Spacer?
+            SizedBox(height: 500,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: AutoSizeText(
-                    "Dark Mode",
+                    "Dark Mode".tr,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -99,10 +98,10 @@ class SideBar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: AutoSizeText(
-                    "Language",
+                    "فارسی".tr,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

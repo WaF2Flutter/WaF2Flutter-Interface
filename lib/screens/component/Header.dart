@@ -30,14 +30,34 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 1 : 2),
-          Spacer(),
+        Spacer(),
+        GestureDetector(
+          onTap: (){
+            Get.toNamed("/doc");
+          },
+          child: Container(
+              width: 100,
+              height: 40,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: secondryColor),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  Icon(Icons.help),
+                  SizedBox(width: 6,),
+                  Text(
+                    "doc".tr,
+                  ),
+                ]),
+              )),
+        ),
+        SizedBox(width: 10),
         Container(
           width: 200,
           height: 40,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: secondryColor
-          ),
+              borderRadius: BorderRadius.circular(10), color: secondryColor),
           child: Obx(
             () {
               return Center(
@@ -49,6 +69,7 @@ class Header extends StatelessWidget {
           ),
         ),
         Container(
+          height: 40,
           margin: const EdgeInsets.only(left: 16),
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
@@ -62,7 +83,9 @@ class Header extends StatelessWidget {
           child: Row(
             children: [
               const Icon(Icons.account_circle, size: 26),
+
               const Text("test"),
+              SizedBox(width: 5,),
               PopupMenuButton<String>(
                 color: secondryColor,
                 onSelected: (value) {

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-//import 'package:msf/controllers/DataController.dart';
+//import 'package:msf/controllers/ResourceUsageController.dart';
 
 class Communication {
   late WebSocketChannel _webSocket;

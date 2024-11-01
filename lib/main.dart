@@ -9,6 +9,8 @@ import 'package:msf/screens/WebSiteScreen.dart';
 import 'package:msf/utills/theme.dart';
 import 'package:msf/utills/translator.dart';
 
+import 'doc/doc.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(ThemeController()); 
@@ -26,12 +28,14 @@ class MyApp extends StatelessWidget {
         translations: Translator(),
         initialBinding: MyBindings(),
         getPages: [
+          GetPage(name: '/l', page: () => LoginScreen()),
           GetPage(name: '/home', page: () => HomeScreen()),
           GetPage(name: '/websites', page: () => Websitescreen()),
           GetPage(name: '/setting', page: () => Settingscreen()),
-          GetPage(name: '/l', page: () => LoginScreen()),
+
+          GetPage(name: '/doc', page: () => doc()),
         ],
-        initialRoute: '/home', 
+        initialRoute: '/home',
         title: 'ModSec Admin Panel'.tr,
         theme: getTheme(isDark), 
       );

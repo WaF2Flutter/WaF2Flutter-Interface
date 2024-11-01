@@ -5,7 +5,7 @@ import 'package:msf/controllers/MenuController.dart';
 import 'package:msf/controllers/ThemeController.dart';
 import 'package:msf/controllers/TranslateController.dart';
 import 'package:msf/controllers/IdleController.dart';
-import 'package:msf/controllers/DataController.dart';
+import 'package:msf/controllers/ResourceUsageController.dart';
 
 class MyBindings implements Bindings {
   @override
@@ -16,6 +16,6 @@ class MyBindings implements Bindings {
     Get.put(Counter()); 
     Get.put(TranslateController());
     Get.put(IdleController());
-    Get.put(DataController(), permanent: false);
+    Get.put(ResourceUsageController(), permanent: false);
   }
 }

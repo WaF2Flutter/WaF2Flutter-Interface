@@ -12,7 +12,7 @@ class ResourceUsageController extends GetxController {
     super.onInit();
     _startUpdatingData();
   }
-
+  //Todo : make the default data grabbed from Server
   void updateRandomUsageData() {
     resourceUsage.update((res) {
       if (res != null) {

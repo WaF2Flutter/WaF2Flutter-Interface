@@ -6,10 +6,9 @@ import 'package:msf/screens/HomeScreen.dart';
 import 'package:msf/screens/LoginScreen.dart';
 import 'package:msf/screens/SettingScreen.dart';
 import 'package:msf/screens/WebSiteScreen.dart';
+import 'package:msf/screens/doc/doc.dart';
 import 'package:msf/utills/theme.dart';
 import 'package:msf/utills/translator.dart';
-
-import 'doc/doc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

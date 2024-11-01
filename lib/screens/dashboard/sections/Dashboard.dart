@@ -43,7 +43,7 @@ class Dashboard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 16,
+                    height: 14,
                   ),
                   Responsive(
                     mobile: Padding(
@@ -88,13 +88,14 @@ class Dashboard extends StatelessWidget {
           tablet: Viewers(),
           desktop: Viewers(),
         ),
-        SizedBox(height: 16,),
+        SizedBox(
+          height: 16,
+        ),
         Responsive(
           mobile: EndSection(),
           tablet: EndSection(),
           desktop: EndSection(),
         ),
-
       ],
     );
   }

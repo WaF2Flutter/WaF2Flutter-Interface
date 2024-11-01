@@ -29,6 +29,7 @@ class AttacksPerApplicationTable extends StatelessWidget {
             Obx(() {
               return SizedBox(
                 width: double.infinity,
+                height: 350,
                 child: DataTable(
                   columnSpacing: 40,
                   horizontalMargin: 0,

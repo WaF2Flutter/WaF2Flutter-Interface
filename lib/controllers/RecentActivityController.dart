@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:msf/data/RecentActivity.dart';
 
 class RecentActivityController extends GetxController {
+
   var recentActivities = <Recentactivity>[].obs;
 
   @override
@@ -13,7 +14,7 @@ class RecentActivityController extends GetxController {
   void fetchRecentActivities() async {
     await Future.delayed(Duration(seconds: 2));
 
-    //default data
+    //Todo : make the default data grabbed from Server
     var fetchedData = [
       Recentactivity(id: 1, app: 'https://www.who_made_it.com', cr: 10, w: 20, n: 30, e: 40, r: 50),
       Recentactivity(id: 2, app: 'https://www.i_said_it.com', cr: 60, w: 70, n: 80, e: 90, r: 100)

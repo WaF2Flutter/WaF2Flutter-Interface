@@ -1,4 +1,3 @@
-
 class Recentactivity {
   final int id;
   final String app;

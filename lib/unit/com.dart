@@ -1,3 +1,59 @@
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:web_socket_channel/web_socket_channel.dart';
+
+class Communication {
+
+  final String apiUrl;
+  late WebSocketChannel webSocketChannel;
+  String? privateKey;
+
+  Communication(this.apiUrl);
+
+  Future<bool> login(String username, String password) async {
+    final response = await http.post(
+      Uri.parse('$apiUrl/auth/login'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'username': username, 'password': password}),
+    );
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      privateKey = data['privateKey'];
+      return true;
+    } else {
+      throw Exception('Failed to authenticate user');
+    }
+  }
+
+  void connectWebSocket() {
+    webSocketChannel = WebSocketChannel.connect(Uri.parse('$apiUrl/socket'));
+    webSocketChannel.stream.listen((message) {
+      print('Received: $message');
+    }, onError: (error) {
+      print('WebSocket Error: $error');
+    });
+  }
+
+  Future<bool> sendLoginSession(String username, String password) async {
+    bool isAuthenticated = await login(username, password);
+    if (isAuthenticated) {
+      connectWebSocket();
+      return true;
+    }
+    return false;
+  }
+
+  void sendMessage(String message) {
+    webSocketChannel.sink.add(message);
+  }
+
+  void dispose() {
+    webSocketChannel.sink.close();
+  }
+}
+/*
 import 'dart:async';
 import 'dart:convert';
 
@@ -70,4 +126,5 @@ class Communication {
       _isConnected = false;
     }
   }
+  */
   */

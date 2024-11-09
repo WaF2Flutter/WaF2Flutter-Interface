@@ -5,12 +5,14 @@ A Big journey is just STARTED.
 A WAF interface made in Flutter Web is being created!
 This project is OPEN SOURCE, means Pull Req is just Open For Who Interested In.
 
-`Status:
-- Login and 2 step Auth [ ]
-- HomeScreen [*]
-- WebSites Screen [ ]
-- Settings Screen [ ]
-- ....
+`UI Status:
+- Login and 2 step Auth [*]
+- Dashboard Screen      [*]
+- WebSites Screen       [*]
+- Settings Screen       [ ]
+- Translator            [*]
+- Theme Changer         [*]
+  
 
 Other information will soon be updated.
 ```

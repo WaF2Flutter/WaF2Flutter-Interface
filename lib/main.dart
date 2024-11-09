@@ -7,6 +7,7 @@ import 'package:msf/screens/LoginScreen.dart';
 import 'package:msf/screens/SettingScreen.dart';
 import 'package:msf/screens/WebSiteScreen.dart';
 import 'package:msf/screens/doc/doc.dart';
+import 'package:msf/screens/login/OtpScreen.dart';
 import 'package:msf/utills/theme.dart';
 import 'package:msf/utills/translator.dart';
 
@@ -31,8 +32,13 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/home', page: () => HomeScreen()),
           GetPage(name: '/websites', page: () => Websitescreen()),
           GetPage(name: '/setting', page: () => Settingscreen()),
-
+          GetPage(name: '/otp', page: () => OtpScreen()),
           GetPage(name: '/doc', page: () => doc()),
+        ],
+        navigatorObservers: [
+          GetObserver((_){
+     print('User route: ${Get.currentRoute}');
+      })
         ],
         initialRoute: '/home',
         title: 'ModSec Admin Panel'.tr,

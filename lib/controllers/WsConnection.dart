@@ -1,37 +1,43 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:msf/unit/api/WebSocketService.dart';
 import 'package:msf/unit/com.dart';
+
+import '../unit/api/HttpService.dart';
 import 'ResourceUsageController.dart';
 
 class WsConnection extends GetxController {
-  final Com _comService = Com();
+  final Com api = Com(
+    httpService: HttpService(),
+    webSocketService: WebSocketService(),
+  );
+
   var isLoading = true.obs;
   var isConnected = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-   connectWebSocket();
+    connectWebSocket();
   }
 
   Future<void> connectWebSocket() async {
     isLoading.value = true;
-    bool connected = await _comService.wsConnect();
+    bool connected = await api.wsConnect(processIncomingData);
     isConnected.value = connected;
     isLoading.value = false;
 
     if (connected) {
-      sendMessage("start_system_info");
+      api.sendMessageOverSocket("start_system_info");
     } else {
       print("Failed to connect to WebSocket.");
     }
   }
 
-
   void processIncomingData(String message) {
+    print("WebSocket received data: $message");
     try {
       Map<String, dynamic> data = jsonDecode(message);
-      print("WebSocket received data: $message");
 
       if (data.containsKey('cpu_usage') ||
           data.containsKey('memory_usage_percentage') ||
@@ -39,7 +45,7 @@ class WsConnection extends GetxController {
           data.containsKey('traffic_usage')) {
 
         _updateResourceUsage(data);
-        print("WebSocket Updated messages");
+        print("WebSocket updated resource usage data.");
       }
     } catch (e) {
       print("Failed to process incoming data: $e");
@@ -53,16 +59,16 @@ class WsConnection extends GetxController {
 
   void sendMessage(String message) async {
     if (isConnected.value) {
-      _comService.sendMessage(message);
+      api.sendMessageOverSocket(message);
       print("Sent message: $message");
     } else {
-      print('E.WebSocket is not connected. Retrying in 1 second...');
+      print('WebSocket is not connected. Retrying in 1 second...');
       await Future.delayed(Duration(seconds: 1));
 
       if (isConnected.value) {
-        _comService.sendMessage(message);
+        api.sendMessageOverSocket(message);
       } else {
-        print("E,Message was not sent.");
+        print("Message was not sent.");
       }
     }
   }
@@ -70,9 +76,7 @@ class WsConnection extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    if (_comService.channel != null) {
-      _comService.channel!.sink.close();
-      print("WebSocket connection closed on controller dispose.");
-    }
+    api.closeWebSocketConnection();
+    print("WebSocket connection closed on controller dispose.");
   }
 }

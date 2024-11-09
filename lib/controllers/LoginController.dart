@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:msf/screens/HomeScreen.dart';
-import '../unit/com.dart';
+import 'package:msf/unit/api/HttpService.dart';
+import 'package:msf/unit/api/WebSocketService.dart';
+import 'package:msf/unit/com.dart';
 
 class LoginController extends GetxController {
   var loginProcess = false.obs;
@@ -11,12 +13,15 @@ class LoginController extends GetxController {
   String username = "";
   String password = "";
 
-  final Com _communication = Com();
+  final Com api = Com(
+    httpService: HttpService(),
+    webSocketService: WebSocketService(),
+  );
 
   Future<void> login(String username, String password) async {
     this.username = username;
     this.password = password;
-    print("received login input");
+    print("Received login input");
 
     if (username.isEmpty || password.isEmpty) {
       Get.snackbar(
@@ -44,9 +49,9 @@ class LoginController extends GetxController {
     }
 
     loginProcess.value = true;
-    await _communication.login(username, password);
+    await api.login(username, password);
 
-    if (_communication.sessionId != null) {
+    if (api.httpService.sessionId != null) {
       otpRequired.value = true;
       Get.snackbar(
         "",
@@ -102,7 +107,7 @@ class LoginController extends GetxController {
   Future<void> verifyOtp(int otp) async {
     loginProcess.value = true;
 
-    final otpSuccess = await _communication.verifyOtp(otp);
+    final otpSuccess = await api.verifyOtp(otp);
 
     if (otpSuccess) {
       loginSuccess.value = true;
@@ -121,8 +126,9 @@ class LoginController extends GetxController {
         icon: const Padding(
           padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
           child: Icon(
-            Icons.info_sharp,
+            Icons.check_circle,
             size: 30,
+            color: Colors.green,
           ),
         ),
         maxWidth: 360,
@@ -145,8 +151,9 @@ class LoginController extends GetxController {
         icon: const Padding(
           padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
           child: Icon(
-            Icons.info_sharp,
+            Icons.error,
             size: 30,
+            color: Colors.red,
           ),
         ),
         maxWidth: 360,

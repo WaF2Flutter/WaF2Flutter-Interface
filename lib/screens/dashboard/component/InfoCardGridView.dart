@@ -43,7 +43,7 @@ class InfoCardGridView extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             numOfFiles: dataController.resourceUsage.value.cpuFiles ?? 0,
             percentage: dataController.resourceUsage.value.cpuUsage ?? 0,
-            totalStorage: dataController.resourceUsage.value.cpuStorage ?? "0%",
+            totalStorage: dataController.resourceUsage.value.cpuUsage ?? "0%",
           )),
         ),
         SizedBox(

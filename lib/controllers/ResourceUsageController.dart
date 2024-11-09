@@ -1,42 +1,36 @@
-import 'dart:async';
-import 'dart:math';
 import 'package:get/get.dart';
 import 'package:msf/data/ResourceUsage.dart';
 
 class ResourceUsageController extends GetxController {
   var resourceUsage = ResourceUsage().obs;
-  final Random _random = Random();
 
   @override
   void onInit() {
     super.onInit();
-    _startUpdatingData();
   }
-  //Todo : make the default data grabbed from Server
-  void updateRandomUsageData() {
+
+  void updateUsageData(Map<String, dynamic> data) {
     resourceUsage.update((res) {
       if (res != null) {
-        res.cpuUsage = _random.nextInt(100);
-        res.cloudUsage = _random.nextInt(100);
-        res.memoryUsage = _random.nextInt(100);
-        res.trafficUsage = _random.nextInt(100);
+        res.cpuUsage = data['cpu_usage']?.toInt() ?? res.cpuUsage;
+        res.cloudUsage = data['cloud_usage_percentage']?.toInt() ?? res.cloudUsage;
+        res.memoryUsage = data['memory_usage_percentage']?.toInt() ?? res.memoryUsage;
+        res.trafficUsage = data['traffic_usage']?.toInt() ?? res.trafficUsage;
 
-        res.cpuFiles = _random.nextInt(50);
-        res.cloudFiles = _random.nextInt(1000);
-        res.memoryFiles = _random.nextInt(50);
-        res.trafficFiles = _random.nextInt(1000);
+        res.cpuFiles = data['cpu_files'] ?? res.cpuFiles;
+        res.cloudFiles = data['cloud_files'] ?? res.cloudFiles;
+        res.memoryFiles = data['memory_files'] ?? res.memoryFiles;
+        res.trafficFiles = data['traffic_files'] ?? res.trafficFiles;
 
-        res.cpuStorage = "${_random.nextInt(100)}%";
-        res.cloudStorage = "${_random.nextInt(1000)} MB";
-        res.memoryStorage = "${_random.nextInt(32)} GB";
-        res.trafficStorage = "${_random.nextInt(1000)} GB";
+        res.cpuStorage = data['cpu_storage'] ?? res.cpuStorage;
+        res.cloudStorage = data['cloud_usage_total'] ?? res.cloudStorage;
+        res.memoryStorage = data['memory_usage_total'] ?? res.memoryStorage;
+        res.trafficStorage = data['traffic_usage_total'] ?? res.trafficStorage;
       }
     });
+    resourceUsage.refresh();
+    print("Updated data: $data");
+
   }
 
-  void _startUpdatingData() {
-    Timer.periodic(Duration(seconds: 2), (timer) {
-      updateRandomUsageData();
-    });
-  }
 }

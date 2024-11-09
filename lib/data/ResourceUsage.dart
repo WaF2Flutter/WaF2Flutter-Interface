@@ -31,18 +31,18 @@ class ResourceUsage {
 
   factory ResourceUsage.fromJson(Map<String, dynamic> json) {
     return ResourceUsage(
-      cpuUsage: json['cpuUsage'] ?? 0,
-      cloudUsage: json['cloudUsage'] ?? 0,
-      memoryUsage: json['memoryUsage'] ?? 0,
-      trafficUsage: json['trafficUsage'] ?? 0,
-      cpuFiles: json['cpuFiles'] ?? 0,
-      cloudFiles: json['cloudFiles'] ?? 0,
-      memoryFiles: json['memoryFiles'] ?? 0,
-      trafficFiles: json['trafficFiles'] ?? 0,
-      cpuStorage: json['cpuStorage'] ?? "0%",
-      cloudStorage: json['cloudStorage'] ?? "0 MB",
-      memoryStorage: json['memoryStorage'] ?? "0 GB",
-      trafficStorage: json['trafficStorage'] ?? "0 GB",
+      cpuUsage: json['cpu_usage']?.toInt() ?? 0,
+      cloudUsage: json['cloud_usage_percentage']?.toInt() ?? 0,
+      memoryUsage: json['memory_usage_percentage']?.toInt() ?? 0,
+      trafficUsage: json['traffic_usage']?.toInt() ?? 0,
+      cpuFiles: json['cpu_files'] ?? 0,
+      cloudFiles: json['cloud_files'] ?? 0,
+      memoryFiles: json['memory_usage_used'] ?? 0,
+      trafficFiles: json['traffic_files'] ?? 0,
+      cpuStorage: json['cpu_storage'] ?? "0%",
+      cloudStorage: json['cloud_usage_total'] ?? "0 MB",
+      memoryStorage: json['memory_usage_total'] ?? "0 GB",
+      trafficStorage: json['traffic_usage_total'] ?? "0 GB",
     );
   }
 

@@ -4,6 +4,8 @@ class Translator extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en': {
+          'مقالات': 'doc',
+          'بازدید کنندگان': 'Viewers',
           'Beta version.If you exprience any problem or having a suggestion please tell us.':'Beta version.If you exprience any problem or having a suggestion please tell us.',
           'English': "فارسی",
           'ModSec Admin Panel': 'ModSec Admin Panel',
@@ -48,9 +50,13 @@ class Translator extends Translations {
           'Critical: ': 'Critical: ',
           'Safe': 'Safe',
           'WAF is ON!': 'WAF is ON!',
-          'وب سایت ها': 'Websites'
+          'وب سایت ها': 'Websites',
+          'زمان باقی مانده:   ':'Time remaining:   '
         },
         'fa': {
+          'doc': 'مقالات',
+          'Viewers': 'بازدید کنندگان',
+          'Time remaining:   ': "زمان باقی مانده:    ",
           'Beta version.If you exprience any problem or having a suggestion please tell us.': 'نسخه ازمایشی.با در اختیار گذاشتن خطا ها باگ ها و یا پیشنهاداتنون ما را در مسیر ساخت تجربه ایی بهتر یاری کنید! با تشکر',
           'فارسی': 'English',
           'ModSec Admin Panel': 'پنل ادمین ModSec',

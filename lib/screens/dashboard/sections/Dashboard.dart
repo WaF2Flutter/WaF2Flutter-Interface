@@ -5,7 +5,6 @@ import 'package:msf/screens/dashboard/component/AttacksPerApplicationTable.dart'
 import 'package:msf/screens/dashboard/component/InfoCardGridView.dart';
 import 'package:msf/screens/dashboard/component/ViewersChart.dart';
 import 'package:msf/screens/dashboard/sections/StatusSection.dart';
-import 'package:msf/data/RecentActivity.dart';
 import 'package:msf/utills/responsive.dart';
 
 class Dashboard extends StatelessWidget {

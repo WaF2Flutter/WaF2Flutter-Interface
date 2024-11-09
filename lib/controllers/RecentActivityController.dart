@@ -12,6 +12,7 @@ class RecentActivityController extends GetxController {
   }
 
   void fetchRecentActivities() async {
+
     await Future.delayed(Duration(seconds: 2));
 
     //Todo : make the default data grabbed from Server

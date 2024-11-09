@@ -9,7 +9,7 @@ class InfoCards extends StatelessWidget {
   final Color color;
   final int numOfFiles;
   final int percentage;
-  final String totalStorage;
+  final Object totalStorage;
 
   InfoCards({
     required this.icon,
@@ -68,7 +68,7 @@ class InfoCards extends StatelessWidget {
                 ),
               ),
               Text(
-                totalStorage,
+                totalStorage.toString(),
                 style: TextStyle(
                   color: Colors.white70,
                 ),

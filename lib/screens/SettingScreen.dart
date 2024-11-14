@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:msf/controllers/IdleController.dart';
+import 'package:msf/controllers/settings/IdleController.dart';
 import 'package:msf/screens/websites/websites_screen.dart';
 import 'package:msf/utills/responsive.dart';
-import '../controllers/MenuController.dart';
+import '../controllers/settings/MenuController.dart';
 import 'component/SideBar.dart';
 import 'package:get/get.dart';
 

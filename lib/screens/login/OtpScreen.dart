@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:msf/controllers/LoginController.dart';
+import 'package:msf/controllers/auth/LoginController.dart';
 import 'package:msf/utills/colorconfig.dart';
 import 'package:msf/utills/responsive.dart';
 
 class OtpScreen extends StatelessWidget {
   final TextEditingController otpController = TextEditingController();
-  final LoginController loginController = Get.find<LoginController>();  // کنترلر برای مدیریت وضعیت
+  final LoginController loginController = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class OtpScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                "Please enter the OTP sent to your device",
+                "Please enter the OTP sent to your device".tr,
                 style: TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
@@ -53,7 +53,7 @@ class OtpScreen extends StatelessWidget {
                   keyboardType: TextInputType.number,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor.withOpacity(0.4),
@@ -68,7 +68,6 @@ class OtpScreen extends StatelessWidget {
                 onPressed: () async {
                   int otp = int.tryParse(otpController.text) ?? 0;
                   if (otp > 0) {
-                    // با فراخوانی این متد وضعیت loginProcess را مدیریت می‌کنیم
                     await loginController.verifyOtp(otp);
                   } else {
                     Get.snackbar(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:get/get.dart';
-import 'package:msf/controllers/ResourceUsageController.dart';
+import 'package:msf/controllers/dashboard/ResourceUsageController.dart';
 import 'package:msf/screens/dashboard/component/InfoCard.dart';
 
 class InfoCardGridView extends StatelessWidget {

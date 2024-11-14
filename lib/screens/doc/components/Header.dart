@@ -25,7 +25,7 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           AutoSizeText(
-            "Welcome Admin!".tr,
+            "Docs".tr,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         if (!Responsive.isMobile(context))
@@ -33,7 +33,7 @@ class Header extends StatelessWidget {
         Spacer(),
         GestureDetector(
           onTap: (){
-            Get.toNamed("/doc");
+            Get.toNamed("/home");
           },
           child: Container(
               width: 100,
@@ -44,76 +44,16 @@ class Header extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  Icon(Icons.help),
+                  Icon(Icons.arrow_back_ios_sharp),
                   SizedBox(width: 6,),
                   Text(
-                    "doc".tr,
+                    "Back".tr,
                   ),
                 ]),
               )),
         ),
         SizedBox(width: 10),
-        Container(
-          width: 200,
-          height: 40,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: secondryColor),
-          child: Obx(
-            () {
-              return Center(
-                child: Text(
-                  "Time remaining:   ".tr + Get.find<Counter>().remainingSec,
-                ),
-              );
-            },
-          ),
-        ),
-        Container(
-          height: 40,
-          margin: const EdgeInsets.only(left: 16),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 16 / 2,
-          ),
-          decoration: BoxDecoration(
-            color: secondryColor,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.white12),
-          ),
-          child: Row(
-            children: [
-              const Icon(Icons.account_circle, size: 26),
 
-              const Text("test"),
-              SizedBox(width: 5,),
-              PopupMenuButton<String>(
-                color: secondryColor,
-                onSelected: (value) {
-                  if (value == 'logout'.tr) {
-                    _showLogoutConfirmation();
-                  }
-                },
-                itemBuilder: (BuildContext context) {
-                  return [
-                    PopupMenuItem<String>(
-                      value: 'profile'.tr,
-                      child: Text('Profile'.tr),
-                    ),
-                    PopupMenuItem<String>(
-                      value: 'settings'.tr,
-                      child: Text('Settings'.tr),
-                    ),
-                    PopupMenuItem<String>(
-                      value: 'logout'.tr,
-                      child: Text('Logout'.tr),
-                    ),
-                  ];
-                },
-                icon: const Icon(Icons.arrow_drop_down_rounded),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:msf/controllers/IdleController.dart';
-import 'package:msf/controllers/WsConnection.dart';
+import 'package:msf/controllers/settings/IdleController.dart';
+import 'package:msf/controllers/ws/WsController.dart';
 import 'package:msf/screens/dashboard/dashboard_screen.dart';
 import 'package:msf/utills/responsive.dart';
 import 'component/SideBar.dart';
-import 'package:msf/controllers/MenuController.dart';
+import 'package:msf/controllers/settings/MenuController.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final Menu_Controller menuController = Get.find<Menu_Controller>();
-  final WsConnection comController = Get.put(WsConnection());
+  final WsController comController = Get.find<WsController>();
 
   @override
   Widget build(BuildContext context) {

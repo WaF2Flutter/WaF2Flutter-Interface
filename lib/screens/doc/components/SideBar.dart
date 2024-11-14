@@ -22,9 +22,8 @@ class SideBar extends StatelessWidget {
               onTap: () {
                 Get.toNamed("/home");
               },
-              leading: const Icon(Icons.speed_outlined, color: Colors.white60),
               title: AutoSizeText(
-                "Dashboard".tr,
+                "1. Introduce".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
@@ -33,9 +32,9 @@ class SideBar extends StatelessWidget {
               onTap: () {
                 Get.toNamed("/websites");
               },
-              leading: const Icon(Icons.web, color: Colors.white60),
+
               title: AutoSizeText(
-                "Websites".tr,
+                "2. Setup".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
@@ -44,27 +43,27 @@ class SideBar extends StatelessWidget {
               onTap: () {
                 Get.toNamed("/setting");
               },
-              leading: const Icon(Icons.settings_sharp, color: Colors.white60),
+
               title: AutoSizeText(
-                "Settings".tr,
+                "3. Control panel".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             ListTile(
               onTap: () {},
-              leading: const Icon(Icons.speed_outlined, color: Colors.white60),
+
               title: AutoSizeText(
-                "Statistics".tr,
+                "3. Api-Refrence".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
             ListTile(
               onTap: () {},
-              leading: const Icon(Icons.padding, color: Colors.white60),
+
               title: AutoSizeText(
-                "System Log".tr,
+                "Developer Final Thoughts".tr,
                 maxLines: 1,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),

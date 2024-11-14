@@ -1,14 +1,16 @@
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:msf/controllers/LoginController.dart';
+import 'package:msf/controllers/auth/CaptchaController.dart';
+import 'package:msf/controllers/auth/LoginController.dart';
 import 'package:msf/utills/colorconfig.dart';
 import 'package:msf/utills/responsive.dart';
 
 class LoginScreen extends StatelessWidget {
-  
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController captchaInputController = TextEditingController();
+  final CaptchaController captchaController = Get.find<CaptchaController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                                 padEnds: false,
                                 enableInfiniteScroll: false,
                                 autoPlayAnimationDuration:
-                                    Duration(milliseconds: 800),
+                                Duration(milliseconds: 800),
                                 viewportFraction: 1.0,
                               ),
                               items: [
@@ -71,16 +73,12 @@ class LoginScreen extends StatelessWidget {
                                 "Welcome to WAF2Flutter!",
                                 style: TextStyle(fontSize: 30),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
+                              SizedBox(height: 20),
                               Text(
                                 "          Login        ",
                                 style: TextStyle(fontSize: 20),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
+                              SizedBox(height: 20),
                               Container(
                                 width: Responsive.isDesktop(context)
                                     ? screenWidth * 0.4
@@ -95,14 +93,12 @@ class LoginScreen extends StatelessWidget {
                                     border: const OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                      BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
+                              SizedBox(height: 20),
                               Container(
                                 width: Responsive.isDesktop(context)
                                     ? screenWidth * 0.4
@@ -117,54 +113,88 @@ class LoginScreen extends StatelessWidget {
                                     border: const OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                      BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: 20,
+                              SizedBox(height: 20),
+                              Obx(() => Text(
+                                "${captchaController.captcha.value}",
+                                style: TextStyle(fontSize: 24),
+                              )),
+                              SizedBox(height: 20),
+                              Container(
+                                width: Responsive.isDesktop(context)
+                                    ? screenWidth * 0.4
+                                    : screenWidth * 0.8,
+                                height: 60,
+                                child: TextField(
+                                  controller: captchaInputController,
+                                  decoration: InputDecoration(
+                                    hintText: "Enter Captcha",
+                                    fillColor: secondryColor,
+                                    filled: true,
+                                    border: const OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                  ),
+                                  onChanged: (value) {
+                                    captchaController.verifyCaptcha(value);
+                                  },
+                                ),
                               ),
+                              SizedBox(height: 20),
                               Obx(
-                                () => Get.find<LoginController>()
-                                        .loginProcess
-                                        .value
+                                    () => Get.find<LoginController>()
+                                    .loginProcess
+                                    .value
                                     ? Center(
-                                        child: CircularProgressIndicator(),
-                                      )
+                                  child: CircularProgressIndicator(),
+                                )
                                     : ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              primaryColor.withOpacity(0.4),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          minimumSize: Size(
-                                            Responsive.isDesktop(context)
-                                                ? screenWidth * 0.2
-                                                : screenWidth * 0.8,
-                                            50,
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          if (!Get.find<LoginController>()
-                                              .loginProcess
-                                              .value) {
-                                            Get.find<LoginController>().login(
-                                                usernameController.text,
-                                                passwordController.text);
-                                          }
-                                        },
-                                        child: Text(
-                                          'Login',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                      ),
-                              )
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                    primaryColor.withOpacity(0.4),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(8),
+                                    ),
+                                    minimumSize: Size(
+                                      Responsive.isDesktop(context)
+                                          ? screenWidth * 0.2
+                                          : screenWidth * 0.8,
+                                      50,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (!Get.find<LoginController>()
+                                        .loginProcess
+                                        .value) {
+                                      if (captchaController
+                                          .isCaptchaCorrect.value) {
+                                        Get.find<LoginController>()
+                                            .login(
+                                          usernameController.text,
+                                          passwordController.text,
+                                        );
+                                      } else {
+                                        Get.snackbar("Error",
+                                            "Captcha is incorrect!");
+                                      }
+                                    }
+                                  },
+                                  child: Text(
+                                    'Login',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

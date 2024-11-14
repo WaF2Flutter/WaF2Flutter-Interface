@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:msf/controllers/RecentActivityController.dart';
+import 'package:msf/controllers/dashboard/RecentActivityController.dart';
 class AttacksPerApplicationTable extends StatelessWidget {
   const AttacksPerApplicationTable({
     Key? key,

@@ -3,7 +3,7 @@ import json
 import secrets
 import psutil
 import shutil
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect ,Body
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Body
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn
@@ -41,8 +41,6 @@ async def login(request: LoginRequest):
     else:
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
-
-
 @app.post("/verify_otp")
 async def verify_otp(session_id: str = Body(...), otp: int = Body(...)):
     if session_id in sessions:
@@ -77,17 +75,29 @@ async def websocket_endpoint(websocket: WebSocket):
     is_sending_info = False
     try:
         while True:
-            command = await websocket.receive_text()
-            print(f"Received message from frontend: {command}")
+            message = await websocket.receive_text()
+            data = json.loads(message)
+            message_type = data.get("type")
+            payload = data.get("payload")
 
-            if command == "start_system_info" and not is_sending_info:
+            if message_type == "system_info" and not is_sending_info:
                 is_sending_info = True
-                while True:
+                while is_sending_info:
                     system_info = await get_system_info()
-                    await websocket.send_text(json.dumps(system_info))
+                    await websocket.send_text(json.dumps({"type": "system_info", "payload": system_info}))
                     await asyncio.sleep(5)
+
+            elif message_type == "user_info":
+                user_info = {"username": "test_user", "role": "admin"}
+                await websocket.send_text(json.dumps({"type": "user_info", "payload": user_info}))
+
+            elif message_type == "notification":
+                notification = {"title": "New message", "content": "You have a new notification."}
+                await websocket.send_text(json.dumps({"type": "notification", "payload": notification}))
+
     except WebSocketDisconnect:
         print("WebSocket connection closed")
+        is_sending_info = False
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8081)

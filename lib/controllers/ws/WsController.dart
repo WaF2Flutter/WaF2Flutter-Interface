@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:msf/controllers/auth/LoginController.dart';
 import 'package:msf/services/unit/api/WebSocketService.dart';
 import 'package:msf/services/unit/com.dart';
 import '../../services/unit/api/HttpService.dart';
@@ -21,8 +22,13 @@ class WsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    connectWebSocket();
-    _startPeriodicStatusCheck();
+    ever(Get.find<LoginController>().loginSuccess, (bool isSuccess) {
+      if (isSuccess) {
+        connectWebSocket();
+        _startPeriodicStatusCheck();
+      }
+    });
+
   }
 
   Future<void> connectWebSocket() async {
